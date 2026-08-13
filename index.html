@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🔥 MIMOON Dance Challenge</title>
+<meta name="description" content="Show Your Moves · Shine on MIMOON · Win Big! Join the MIMOON Dance Challenge.">
+
+<!-- Preconnect for faster font fetch -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="image" href="mimoon-banner.webp" fetchpriority="high">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --pink:#FF2E93;
+    --pink-deep:#D6127A;
+    --purple:#7B2FF7;
+    --blue:#20C7FF;
+    --yellow:#FFD93B;
+    --ink:#241041;
+    --cream:#FFF8EF;
+    --night:#1A0E36;
+    --night-2:#2A1656;
+    --radius:22px;
+    --shadow:0 14px 30px rgba(36,16,65,0.18);
+  }
+
+  *,*::before,*::after{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+
+  body{
+    margin:0;
+    font-family:'Nunito',system-ui,-apple-system,Segoe UI,sans-serif;
+    color:var(--ink);
+    background:var(--cream);
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+
+  h1,h2,h3,.display{
+    font-family:'Fredoka',system-ui,sans-serif;
+    font-weight:700;
+    line-height:1.08;
+    margin:0;
+  }
+
+  img{max-width:100%;display:block;}
+  a{color:inherit;}
+
+  .sr-only{
+    position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+    overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    width:100%;
+    background:linear-gradient(120deg,#FF7AC6 0%,#B44BFF 42%,#3EC8FF 100%);
+    overflow:hidden;
+  }
+
+  .hero-banner-wrap{
+    width:100%;
+    display:block;
+    line-height:0;
+  }
+
+  .hero-banner-wrap picture,
+  .hero-banner-wrap img{
+    width:100%;
+    height:auto;
+    display:block;
+    object-fit:contain;
+  }
+
+  /* wave transition from banner into the cream body */
+  .hero-wave{
+    display:block;
+    line-height:0;
+    margin-top:-2px;
+  }
+  .hero-wave svg{
+    display:block;
+    width:100%;
+    height:clamp(34px,6vw,64px);
+  }
+
+  /* title badge, straddling the wave crest */
+  .hero-title-wrap{
+    background:var(--cream);
+    margin-top:clamp(-34px,-6vw,-22px);
+    position:relative;
+    z-index:2;
+    display:flex;
+    justify-content:center;
+    padding:0 20px clamp(30px,6vw,50px);
+  }
+
+  .title-card{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    max-width:100%;
+    background:#fff;
+    padding:clamp(12px,2.6vw,18px) clamp(22px,5vw,38px);
+    border-radius:999px;
+    box-shadow:0 16px 32px rgba(123,47,247,0.28);
+  }
+
+  .hero-title{
+    font-size:clamp(1.2rem,4.6vw,2.5rem);
+    text-align:center;
+    white-space:nowrap;
+    background:linear-gradient(110deg,var(--pink) 0%,var(--purple) 55%,var(--blue) 100%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    -webkit-text-fill-color:transparent;
+    color:transparent;
+  }
+
+  /* floating notes */
+  .notes{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    z-index:0;
+  }
+  .notes span{
+    position:absolute;
+    font-size:1.4rem;
+    color:#fff;
+    opacity:0.55;
+    animation:floatNote 7s ease-in-out infinite;
+  }
+  .notes span:nth-child(1){left:6%; top:18%; animation-delay:0s;}
+  .notes span:nth-child(2){left:88%; top:30%; animation-delay:1.4s; font-size:1.1rem;}
+  .notes span:nth-child(3){left:14%; top:70%; animation-delay:2.6s; font-size:1rem;}
+  .notes span:nth-child(4){left:80%; top:75%; animation-delay:3.6s;}
+
+  @keyframes floatNote{
+    0%,100%{transform:translateY(0) rotate(-4deg);}
+    50%{transform:translateY(-18px) rotate(6deg);}
+  }
+
+  @media (max-width:520px){
+    .hero-title{white-space:normal;}
+  }
+
+  /* ---------- SECTION SHELL ---------- */
+  section.block{
+    position:relative;
+    padding:clamp(46px,7vw,84px) 20px;
+  }
+
+  .wrap{
+    max-width:1080px;
+    margin:0 auto;
+  }
+
+  .eyebrow-heading{
+    font-size:clamp(2.1rem,6.4vw,3.4rem);
+    font-weight:700;
+    letter-spacing:0.2px;
+    display:flex;
+    align-items:center;
+    gap:14px;
+    flex-wrap:wrap;
+    color:var(--ink);
+  }
+
+  .heading-underline{
+    width:120px;
+    height:9px;
+    border-radius:9px;
+    margin-top:16px;
+    background:linear-gradient(90deg,var(--pink),var(--purple),var(--blue));
+    box-shadow:0 4px 10px rgba(123,47,247,0.28);
+  }
+
+  @media (max-width:520px){
+    .eyebrow-heading{font-size:clamp(1.6rem,7.5vw,2.1rem); gap:10px;}
+    .heading-underline{width:88px; height:7px; margin-top:12px;}
+  }
+
+  /* ---------- BLOCK 1 : JOIN ---------- */
+  .block-join{
+    background:var(--cream);
+  }
+
+  .join-grid{
+    margin-top:36px;
+    display:grid;
+    grid-template-columns:1.05fr 0.95fr;
+    gap:clamp(28px,4vw,56px);
+    align-items:center;
+  }
+
+  .steps{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+  }
+
+  .step{
+    display:flex;
+    align-items:flex-start;
+    gap:16px;
+    background:#fff;
+    border-radius:18px;
+    padding:16px 18px;
+    box-shadow:var(--shadow);
+    border:2px solid rgba(123,47,247,0.06);
+  }
+
+  .step-num{
+    flex:0 0 auto;
+    width:42px;height:42px;
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Fredoka',sans-serif;
+    font-weight:700;
+    font-size:1.15rem;
+    color:#fff;
+    background:linear-gradient(135deg,var(--pink),var(--purple));
+    box-shadow:0 6px 14px rgba(255,46,147,0.35);
+  }
+
+  .step p{
+    margin:0;
+    font-size:1.05rem;
+    font-weight:800;
+    color:var(--ink);
+    padding-top:6px;
+  }
+
+  .step{
+    text-decoration:none;
+    color:inherit;
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .step:hover{
+    transform:translateY(-3px);
+    box-shadow:0 18px 34px rgba(36,16,65,0.22);
+  }
+  .whatsapp-step{
+    border:2px dashed rgba(32,199,255,0.35);
+    margin-top:4px;
+  }
+
+  /* phone mock with video */
+  .phone-frame{
+    justify-self:center;
+    width:min(280px,80%);
+    background:var(--night);
+    border-radius:38px;
+    padding:12px;
+    box-shadow:0 24px 50px rgba(26,14,54,0.35);
+    position:relative;
+  }
+  .phone-frame::before{
+    content:"";
+    position:absolute;
+    top:22px;left:50%;
+    transform:translateX(-50%);
+    width:64px;height:6px;
+    background:rgba(255,255,255,0.25);
+    border-radius:6px;
+  }
+  .phone-screen{
+    border-radius:26px;
+    overflow:hidden;
+    background:#000;
+    aspect-ratio:9/16;
+  }
+  .phone-screen video{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+  }
+
+  /* ---------- BLOCK 2 : PRIZES ---------- */
+  .block-prizes{
+    background:radial-gradient(120% 140% at 15% 0%,#FFE3F1 0%,#FDEFFF 45%,#EAF7FF 100%);
+  }
+
+  .prize-panel{
+    position:relative;
+    margin-top:34px;
+    background:#fff;
+    border-radius:28px;
+    padding:clamp(26px,5vw,44px);
+    box-shadow:var(--shadow);
+    border:2px solid rgba(255,46,147,0.08);
+    overflow:hidden;
+  }
+  .prize-panel::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(160deg,rgba(255,217,59,0.14),transparent 55%);
+    pointer-events:none;
+  }
+
+  .prize-row{
+    position:relative;
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px;
+  }
+
+  .prize-chip{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    background:linear-gradient(120deg,rgba(255,46,147,0.10),rgba(123,47,247,0.10));
+    border:2px solid rgba(123,47,247,0.18);
+    border-radius:999px;
+    padding:14px 24px;
+    font-family:'Fredoka',sans-serif;
+    font-weight:600;
+    font-size:clamp(1.02rem,2.8vw,1.3rem);
+    color:var(--ink);
+  }
+  .prize-divider{
+    position:relative;
+    height:2px;
+    margin:clamp(26px,4vw,34px) 0;
+    background:linear-gradient(90deg,transparent,rgba(255,217,59,0.8),transparent);
+  }
+
+  .exposure-content{position:relative;}
+  .exposure-content h3{
+    font-size:clamp(1.3rem,3.2vw,1.7rem);
+    margin-bottom:12px;
+  }
+  .exposure-content p{
+    font-size:1.05rem;
+    font-weight:700;
+    line-height:1.55;
+    margin:0 0 10px;
+  }
+  .exposure-content p:last-child{margin-bottom:0;}
+
+  @media (max-width:520px){
+    .prize-chip{font-size:1rem; padding:12px 18px;}
+    .exposure-content p{font-size:0.98rem;}
+  }
+
+  /* ---------- BLOCK 3 : CONTACT CTA ---------- */
+  .block-contact{
+    background:linear-gradient(135deg,var(--night) 0%,var(--night-2) 55%,#3A1868 100%);
+    color:#fff;
+    text-align:center;
+    overflow:hidden;
+    position:relative;
+  }
+  .block-contact .heading-underline{margin-left:auto;margin-right:auto;}
+  .block-contact .eyebrow-heading{justify-content:center;color:#fff;}
+
+  .contact-card{
+    margin:32px auto 0;
+    max-width:560px;
+    background:rgba(255,255,255,0.06);
+    border:1px solid rgba(255,255,255,0.16);
+    backdrop-filter:blur(6px);
+    border-radius:26px;
+    padding:clamp(26px,5vw,40px);
+  }
+
+  .contact-number{
+    display:inline-flex;
+    align-items:center;
+    gap:14px;
+    margin-top:18px;
+    background:linear-gradient(120deg,#25D366,#1AA753);
+    color:#fff;
+    text-decoration:none;
+    font-family:'Fredoka',sans-serif;
+    font-weight:600;
+    font-size:clamp(1.1rem,2.6vw,1.4rem);
+    padding:16px 28px;
+    border-radius:50px;
+    box-shadow:0 16px 34px rgba(37,211,102,0.35);
+    transition:transform .18s ease;
+  }
+  .contact-number:hover{transform:translateY(-3px) scale(1.02);}
+  .contact-number .wa-icon{
+    width:32px;height:32px;
+    border-radius:50%;
+    background:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-size:1.05rem;
+  }
+
+  .tag-pill{
+    display:inline-block;
+    margin-top:22px;
+    padding:8px 18px;
+    border-radius:50px;
+    background:rgba(255,217,59,0.16);
+    color:var(--yellow);
+    font-weight:800;
+    letter-spacing:0.4px;
+    border:1px solid rgba(255,217,59,0.4);
+  }
+
+  .contact-glow{
+    position:absolute;
+    width:480px;height:480px;
+    border-radius:50%;
+    filter:blur(90px);
+    opacity:0.35;
+    z-index:0;
+  }
+  .contact-glow.g1{background:var(--pink); top:-140px; left:-140px;}
+  .contact-glow.g2{background:var(--blue); bottom:-160px; right:-120px;}
+  .block-contact .wrap{position:relative;z-index:1;}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:840px){
+    .join-grid{grid-template-columns:1fr;}
+    .phone-frame{order:-1;margin-bottom:6px;width:min(240px,68%);}
+    .prize-cards{grid-template-columns:1fr;}
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    .notes span{animation:none;}
+    html{scroll-behavior:auto;}
+  }
+
+  :focus-visible{
+    outline:3px solid var(--blue);
+    outline-offset:3px;
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-banner-wrap">
+    <picture>
+      <source srcset="mimoon-banner.webp" type="image/webp">
+      <img src="mimoon-banner.jpg" alt="MIMOON Dance Challenge — Show Your Moves, Shine on MIMOON, Win Big! Illustration of two kids and the yellow MIMOON mascot dancing while a boy films with his phone." width="2172" height="724" fetchpriority="high" decoding="async">
+    </picture>
+  </div>
+
+  <div class="notes" aria-hidden="true">
+    <span>🎵</span><span>🎶</span><span>🎵</span><span>🎶</span>
+  </div>
+
+  <div class="hero-wave" aria-hidden="true">
+    <svg viewBox="0 0 1440 64" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,20 C240,60 480,0 720,18 C960,36 1200,64 1440,26 L1440,64 L0,64 Z" style="fill:var(--cream)"/>
+    </svg>
+  </div>
+</header>
+
+<div class="hero-title-wrap">
+  <div class="title-card">
+    <h1 class="hero-title">🔥 MIMOON Dance Challenge</h1>
+  </div>
+</div>
+
+<main>
+
+  <!-- BLOCK 1 -->
+  <section class="block block-join" id="join" aria-labelledby="join-heading">
+    <div class="wrap">
+      <h2 class="eyebrow-heading" id="join-heading">🎥 Super easy to join:</h2>
+      <div class="heading-underline" aria-hidden="true"></div>
+
+      <div class="join-grid">
+        <div class="steps">
+          <div class="step">
+            <span class="step-num">1</span>
+            <p>Copy the MIMOON dance moves</p>
+          </div>
+          <div class="step">
+            <span class="step-num">2</span>
+            <p>Film your dance video</p>
+          </div>
+          <div class="step">
+            <span class="step-num">3</span>
+            <p>Post it under the official community topic: #Mimoondance</p>
+          </div>
+
+          <a class="step whatsapp-step" href="https://wa.me/8613386141928" target="_blank" rel="noopener">
+            <span class="step-num" aria-hidden="true">💬</span>
+            <p>📩 Or send your video directly via WhatsApp: +86 13386141928</p>
+          </a>
+        </div>
+
+        <div class="phone-frame">
+          <div class="phone-screen">
+            <video
+              controls
+              preload="metadata"
+              poster="video-poster.jpg"
+              playsinline
+              width="405"
+              height="720"
+              aria-label="MIMOON dance challenge demo video showing the moves to copy">
+              <source src="mimoon-dance-demo.mp4" type="video/mp4">
+              Your browser does not support embedded video. You can
+              <a href="mimoon-dance-demo.mp4">download the demo video</a> instead.
+            </video>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOCK 2 -->
+  <section class="block block-prizes" id="prizes" aria-labelledby="prizes-heading">
+    <div class="wrap">
+      <h2 class="eyebrow-heading" id="prizes-heading">🎁 Amazing prizes waiting for you:</h2>
+      <div class="heading-underline" aria-hidden="true"></div>
+
+      <div class="prize-panel">
+        <div class="prize-row">
+          <span class="prize-chip">✨ Exclusive MIMOON Ride</span>
+          <span class="prize-chip">✨ 5,000 Coins</span>
+        </div>
+
+        <div class="prize-divider" aria-hidden="true"></div>
+
+        <div class="exposure-content">
+          <h3>🌟 Extra exposure opportunity:</h3>
+          <p>Top videos will be handpicked by our official team and featured on MIMOON’s Facebook &amp; YouTube pages!</p>
+          <p>Show your moves to a global audience and become the next star 💃</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOCK 3 -->
+  <section class="block block-contact" id="contact" aria-labelledby="contact-heading">
+    <div class="contact-glow g1" aria-hidden="true"></div>
+    <div class="contact-glow g2" aria-hidden="true"></div>
+    <div class="wrap">
+      <h2 class="eyebrow-heading" id="contact-heading">📞 For submissions or questions, contact us on WhatsApp:</h2>
+      <div class="heading-underline" aria-hidden="true"></div>
+
+      <div class="contact-card">
+        <a class="contact-number" href="https://wa.me/8613386141928" target="_blank" rel="noopener">
+          <span class="wa-icon" aria-hidden="true">📞</span>
+          <span>+86 13386141928</span>
+        </a>
+        <div>
+          <span class="tag-pill">#Mimoondance</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+</body>
+</html>
