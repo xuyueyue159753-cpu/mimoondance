@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MIMOON Dance Challenge</title>
+
+<style>
+  :root{
+    --pink: #FF3E9A;
+    --pink-deep: #E01C7A;
+    --purple: #8B3FE8;
+    --blue: #2FA8FF;
+    --yellow: #FFD23F;
+    --yellow-deep: #FFB800;
+    --ink: #2A1245;
+    --ink-soft: #5B4A78;
+    --card: #FFFFFF;
+    --cream: #FFF7EC;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: "PingFang SC", "Helvetica Neue", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    background:
+      radial-gradient(120% 60% at 10% 0%, #FF8FCB 0%, transparent 55%),
+      radial-gradient(120% 60% at 100% 0%, #6FD1FF 0%, transparent 55%),
+      linear-gradient(160deg, #FFB1DE 0%, #C67CF0 35%, #6A6BF0 65%, #3FB3FF 100%);
+    color: var(--ink);
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 0 0 32px;
+  }
+
+  .container {
+    max-width: 480px;
+    width: 100%;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    position: relative;
+    overflow: hidden;
+    line-height: 0;
+  }
+
+  .hero img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+  }
+
+  .hero::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: -1px;
+    height: 28px;
+    background: var(--cream);
+    border-radius: 24px 24px 0 0;
+  }
+
+  /* ---------- BODY WRAPPER ---------- */
+  .body-wrap {
+    background: var(--cream);
+    padding: 20px 16px 8px;
+  }
+
+  /* ---------- VIDEO (portrait) ---------- */
+  .video-card {
+    width: 62%;
+    max-width: 260px;
+    margin: 0 auto 22px;
+    aspect-ratio: 9 / 16;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 26px rgba(139, 63, 232, 0.28);
+    border: 3px solid #fff;
+    background: #000;
+  }
+
+  video {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+  }
+
+  /* ---------- SECTION CARDS ---------- */
+  .section {
+    background: var(--card);
+    border-radius: 20px;
+    padding: 20px 18px;
+    margin-bottom: 18px;
+    box-shadow: 0 6px 18px rgba(139, 63, 232, 0.12);
+    position: relative;
+    border: 1px solid rgba(139, 63, 232, 0.08);
+  }
+
+  .section-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .badge {
+    flex: 0 0 auto;
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 19px;
+  }
+
+  .section h2 {
+    font-size: 17px;
+    margin: 0;
+    font-weight: 800;
+    color: var(--ink);
+  }
+
+  .section--join .badge { background: linear-gradient(135deg, var(--pink), var(--pink-deep)); }
+  .section--prize .badge { background: linear-gradient(135deg, var(--yellow), var(--yellow-deep)); }
+  .section--boost .badge { background: linear-gradient(135deg, var(--blue), #1B7FE0); }
+
+  /* Join section */
+  .steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    counter-reset: step;
+  }
+
+  .steps li {
+    counter-increment: step;
+    position: relative;
+    padding: 8px 0 8px 34px;
+    font-size: 14.5px;
+    color: var(--ink);
+    line-height: 1.45;
+  }
+
+  .steps li::before {
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 6px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--pink), var(--purple));
+    color: #fff;
+    font-size: 12px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .steps li.step-whatsapp {
+    border-top: 1px dashed #F0DCEF;
+    margin-top: 6px;
+    padding-top: 12px;
+  }
+
+  .steps a.wa-link {
+    color: #1FA855;
+    font-weight: 800;
+    text-decoration: none;
+  }
+
+  .hashtag-box {
+    display: inline-block;
+    background: linear-gradient(90deg, #FFE7F5, #F3E5FF);
+    border: 1.5px dashed var(--pink);
+    border-radius: 10px;
+    padding: 3px 10px;
+    font-weight: 800;
+    color: var(--pink-deep);
+    font-size: 14px;
+  }
+
+  /* Prize section */
+  .prize-grid {
+    display: flex;
+    gap: 12px;
+  }
+
+  .prize-item {
+    flex: 1;
+    background: linear-gradient(160deg, #FFF6DD, #FFE9B0);
+    border-radius: 16px;
+    padding: 16px 10px;
+    text-align: center;
+    border: 1.5px solid #FFD23F;
+  }
+
+  .prize-emoji {
+    font-size: 28px;
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .prize-item .prize-name {
+    font-weight: 800;
+    font-size: 14px;
+    color: #7A4B00;
+    display: block;
+  }
+
+  .prize-item .prize-sub {
+    font-size: 11.5px;
+    color: #A17A2C;
+    margin-top: 2px;
+    display: block;
+  }
+
+  /* Boost section */
+  .boost-text {
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--ink);
+    margin: 0 0 14px;
+  }
+
+  .platform-tags {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .platform-tags span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: linear-gradient(90deg, #E7F4FF, #DCEBFF);
+    color: #1B6FCC;
+    font-weight: 700;
+    font-size: 13px;
+    padding: 8px 16px;
+    border-radius: 20px;
+    border: 1px solid #BFE0FF;
+  }
+
+  /* Footer contact */
+  .footer-contact {
+    text-align: center;
+    padding: 10px 12px 4px;
+  }
+
+  .footer-contact .divider {
+    width: 40px;
+    height: 3px;
+    border-radius: 3px;
+    background: linear-gradient(90deg, var(--pink), var(--blue));
+    margin: 0 auto 14px;
+  }
+
+  .footer-contact p {
+    margin: 0;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+  }
+
+  .footer-contact .highlight {
+    display: block;
+    margin-top: 2px;
+    color: var(--pink-deep);
+    font-weight: 800;
+    font-size: 14px;
+  }
+</style>
+</head>
+
+<body>
+  <div class="container">
+
+    <!-- ============ HERO ============ -->
+    <div class="hero">
+      <img src="mimoon-header.jpg" alt="MIMOON Dance Challenge" width="2172" height="724" fetchpriority="high">
+    </div>
+
+    <div class="body-wrap">
+
+      <!-- ============ VIDEO (portrait) ============ -->
+      <div class="video-card">
+        <video controls preload="none" poster="video-poster.jpg" playsinline>
+          <source src="mimoon-dance-vertical.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+
+      <!-- ============ SECTION 1: 参与方式 ============ -->
+      <div class="section section--join">
+        <div class="section-head">
+          <div class="badge">🎥</div>
+          <h2>Super Easy to Join</h2>
+        </div>
+        <ol class="steps">
+          <li>Imitate the Mimoon dance moves</li>
+          <li>Film your dance video</li>
+          <li>Post it under the official topic: <span class="hashtag-box">#Mimoondance</span></li>
+          <li class="step-whatsapp">Or send your video directly via WhatsApp: <a class="wa-link" href="https://wa.me/8613386141928" target="_blank">+86 13386141928</a></li>
+        </ol>
+      </div>
+
+      <!-- ============ SECTION 2: 奖品 ============ -->
+      <div class="section section--prize">
+        <div class="section-head">
+          <div class="badge">🎁</div>
+          <h2>Amazing Prizes Await</h2>
+        </div>
+        <div class="prize-grid">
+          <div class="prize-item">
+            <span class="prize-emoji">🏍️</span>
+            <span class="prize-name">Exclusive Ride</span>
+            <span class="prize-sub">MIMOON Limited</span>
+          </div>
+          <div class="prize-item">
+            <span class="prize-emoji">🪙</span>
+            <span class="prize-name">5,000 Coins</span>
+            <span class="prize-sub">In-app Reward</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ SECTION 3: 曝光机会 ============ -->
+      <div class="section section--boost">
+        <div class="section-head">
+          <div class="badge">🌟</div>
+          <h2>Extra Exposure Opportunity</h2>
+        </div>
+        <p class="boost-text">
+          Top videos will be handpicked by our official team and featured on MIMOON's official pages — show your moves to a global audience and become the next star 💃
+        </p>
+        <div class="platform-tags">
+          <span>📘 Facebook</span>
+          <span>▶️ YouTube</span>
+        </div>
+      </div>
+
+      <div class="footer-contact">
+        <div class="divider"></div>
+        <p>📞 For submissions or questions, contact us on WhatsApp</p>
+        <span class="highlight">+86 13386141928</span>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>
